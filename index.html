@@ -2,12 +2,22 @@
 
 <head>
 <link href='https://fonts.googleapis.com/css?family=Poller+One' rel='stylesheet' type='text/css'>
-<script src="/assets/jquery.js"></script>
+<script src="index.js"></script>
 <style>
+
+
+h1 {
+  font-size: 72px;
+  margin: 10px 60px 0 100px;
+}
+h2 {
+  font-size: 31px;
+  margin: -5px 0 25px 55;
+}
 
 .robot {
   position: relative;
-  left: 200px;
+  left: 250px;
 }
 
 .beep {
@@ -38,11 +48,13 @@
     background-size: 75px 150px;#cc5;
   }
 }
+
 .laser {
   animation: blink .5s infinite;
   -webkit-animation: blink .5s infinite;
   -moz-animation: blink .5s infinite;
 }
+
 .brain {
   background: radial-gradient(circle, white 15%, transparent 40%), #cc5;
   background: -moz-radial-gradient(circle, white 15%, transparent 40%), #cc5; 
@@ -55,6 +67,7 @@
   position: relative;
   left: 70px;
 }
+
 .torso {
   height: 0;
   width: 140px;
@@ -80,6 +93,8 @@
   z-index: -1;
 }
 
+/* left arm up */
+
 .left-up {
   font-family: 'Poller One', verdana, arial, sans-serif;
   font-weight: bold;
@@ -94,7 +109,7 @@
   z-index: -1;
 }
 
-/*  This is arm down  */
+/*  Right arm down  */
 
 .right {
   font-family: 'Poller One', verdana, arial, sans-serif;
@@ -110,7 +125,7 @@
   z-index: -1;
 }
 
-/*  this is arm up  */
+/*  Right arm up  */
 
 
  .right-up { 
@@ -157,12 +172,19 @@
 }
 
 img {
-  animation: dance 4s infinite;
+  animation: dance 6s infinite;
+  animation: strobe .2s infinite;
   -webkit-animation: dance 4s infinite;
   -moz-animation: dance 4s infinite;
   position: absolute;
-  top: 200px;
-  left: 400px;
+  top: 160px;
+  left: 590px;
+}
+@-webkit-keyframes strobe {
+  50% {
+    background: -webkit-radial-gradient(circle, red 15%, transparent 40%),
+    background-size: 75px 150px;#cc5;
+  }
 }
 
 button {
@@ -174,12 +196,21 @@ button {
     margin: 40px 10px;
     padding: 10px;
 }
+
+button:hover {
+  background: blue;
 }
+
+
 </style>
 </head>
 
-<body>
 
+
+
+<body>
+<h1>PARTY-BOT 6000</h1>
+<h2>"Give my buttons a beepity-boop, and let's rage!!"</h2>
 <div class="robot">
   <div class="beep"></div>
   <div class="brain"></div>
@@ -191,15 +222,12 @@ button {
 </div>
 
 <button class="flash">Laserbeams </button>
-<button class="color">Change color</button>
+<button class="color">Change Color</button>
 <button class="right-arm">Fistbump Right</button>
 <button class="left-arm">Fistbump Left</button>
-<!--
-<button class="moves">Dance on/off</button>
--->
-<!--
-<img src="/assets/dance_cotter.gif">
--->
+<button class="disco">Disco Ball</button>
+
+<img src="https://i.imgur.com/m4SUNMf.png">
 
 
 <script>
@@ -236,8 +264,23 @@ $("body").css("background" , randomRGBA);
 //alert(randomRGBA);
 });
 
-$(".moves").click(function() {
-  $("img").toggle ();
+// When color button is clicked...
+$(".color").click(function() {
+  
+  // assign each named color a random number 0-255
+  var red = Math.floor(Math.random() * 255);
+  var green = Math.floor(Math.random() * 255);
+  var blue = Math.floor(Math.random() * 255);
+
+//generate an RGBA value from red, green, blue
+var randomRGBA = 'rgba('+red+','+green+','+blue+',1)';
+
+//and change body's background to our random color
+$("body").css("color" , randomRGBA);
+});
+
+$(".disco").click(function() {
+  $("img").toggle("dance");
 });
 </script>
 </body>
